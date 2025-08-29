@@ -14,12 +14,12 @@ void comand_str_arguments(int amount_arguments, char* mass_with_arguments[],
 
         if (!strcmp(mass_with_arguments[i], is_test)) {
             code_data->is_without_tests = true;
-            printf("||Activate mod without tests||\n");
+            printf("\033[1;35m||Activate mod without tests||\033[1;0m\n");
         }
 
         else if (!strcmp(mass_with_arguments[i], SKN)) {
             code_data->is_master_input = true;
-            printf("||Activate God Mod||\n");
+            printf("\033[1;35m||Activate God Mod||\033[1;0m\n");
         }
 
         else if (!strcmp(mass_with_arguments[i], Cats)) {
@@ -28,11 +28,11 @@ void comand_str_arguments(int amount_arguments, char* mass_with_arguments[],
 
         else if (!strcmp(mass_with_arguments[i], test)) {
             code_data->is_standard_work = false;
-            printf("||Active only test mod||\n");
+            printf("\033[1;35m||Active only test mod||\033[1;0m\n");
         }
 
         else {
-            printf("Sorry, we do not know this code\n");
+            printf("\033[1;35mSorry, we do not know this code\033[1;0m\n");
         }
     }
 }

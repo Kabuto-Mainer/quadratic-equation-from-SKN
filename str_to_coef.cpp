@@ -21,7 +21,7 @@ int power_to_coef(struct str_to_coef_data* adr_stc_data,
     switch (adr_stc_data->power) {
 
         case -2:
-            printf("Not correct input\n");
+            printf("\033[1;34mNot correct input\n\033[1;0m");
             return -1;
 
         case -1:
@@ -50,7 +50,7 @@ int power_to_coef(struct str_to_coef_data* adr_stc_data,
             return 0;
 
         default:
-            printf("Equation with power more, than 2 we do not decide\n");
+            printf("\033[1;34mEquation with power more, than 2 we do not decide\n\033[1;0m");
             return -1;
     }
 }
@@ -70,7 +70,7 @@ int power_of_x(char* string) {
             power = str_to_double(string + 2, &len_power);
 
             if (!is_near_zero(int(power) - power)) {
-                printf("We do not decide equation with float power\n");
+                printf("\033[1;34mWe do not decide equation with float power\n\033[1;0m");
                 return -1;
             }
             power = int(power);
@@ -78,7 +78,7 @@ int power_of_x(char* string) {
             if (power < MAX_POWER) {
                 return power; // Higher is casting to int and checking, what power is natural
             }
-            printf("We do not decide equation with power more %d\n", MAX_POWER);
+            printf("\033[1;34mWe do not decide equation with power more %d\n\033[1;m", MAX_POWER);
             return -1;
 
         case 1:
@@ -87,10 +87,10 @@ int power_of_x(char* string) {
         case 0:
             return -1;
         default:
-            printf("ERROR in power_of_x (default)\n");
+            printf("\033[1;31mERROR in power_of_x (default)\n\033[1;0m");
             return NAN;
     }
-    printf("ERROR in power_of_x\n");
+    printf("\033[1;31mERROR in power_of_x\n\033[1;0m");
     return NAN;
 }
 int plus_or_minus(int symbol, int add_index) {
@@ -142,7 +142,7 @@ int string_to_coefficient(char* string, struct coefficient_data* adr_coefficient
         all.is_plus = plus_or_minus(string[all.index], all.index);
 
         if (all.is_plus == -1) {
-            printf("Input is not correct\n");
+            printf("\033[1;34mInput is not correct\n\033[1;34m");
             return -1;
         }
 
@@ -157,12 +157,12 @@ int string_to_coefficient(char* string, struct coefficient_data* adr_coefficient
 
         if (all.buffer != 0 && is_near_zero(all.buffer)) {
         // ^^^^^ This comparision is required, because if coefficient can be zero
-            printf("Sorry, but we do not support such precision in solving the equation. Please, use less precise coefficient\n");
+            printf("\033[1;34mSorry, but we do not support such precision in solving the equation. Please, use less precise coefficient\n\033[1;0m");
             return -1;
         }
 
         if ((all.buffer > MAX_NUM) || (all.buffer < MIN_NUM)) {
-            printf("These coefficient is too big ot small. Please use another coefficient\n");
+            printf("\033[1;34mThese coefficient is too big ot small. Please use another coefficient\n\033[1;0m");
             return -1;
         }
 

@@ -63,7 +63,7 @@ int solve_quadratic_equation(struct coefficient_data* adr_coefficient_data,
         adr_coefficient_data->a > MAX_NUM || adr_coefficient_data->a < MIN_NUM ||
         adr_coefficient_data->c > MAX_NUM || adr_coefficient_data->c < MIN_NUM) {
 
-        printf("Sorry, but we do not support so big or small digit, please, enter another equation\n");
+        printf("\033[1;34mSorry, but we do not support so big or small digit, please, enter another equation\n\033[1;0m");
         return -1;
     }
 

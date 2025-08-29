@@ -23,7 +23,7 @@ enum AMOUNT_OF_ROOTS {
 const double MAX_NUM = 1e20;///< Max num, which user can enter
 const double MIN_NUM = -1e20;///< Min num, which user can enter
 /**
- * \struct coefficients
+ * \struct coefficient_data
  * \brief struct with coefficient of quadrat equation
  */
 struct coefficient_data {

@@ -49,13 +49,13 @@ int test_for_solve_equation(struct coefficient_data* adr_coefficient_data,
         if ( !(is_near_zero(adr_root->x_1 - true_x->x_1) && is_near_zero(adr_root->x_2 - true_x->x_2) )
         && !(is_near_zero(adr_root->x_1 - true_x->x_2) &&is_near_zero(adr_root->x_2 - true_x->x_1)) ) {
 
-            printf("ERROR in solve_sqrt with %lf %lf %lf || must be %lf %lf || output %lf %lf\n",
+            printf("\033[1;31mERROR in solve_sqrt with %lf %lf %lf || must be %lf %lf || output %lf %lf\n\033[1;0m",
             adr_coefficient_data->a, adr_coefficient_data->b, adr_coefficient_data->c,
             true_x->x_1, true_x->x_2, adr_root->x_1, adr_root->x_2);
         }
     }
     if (fclose(test_sqrt)) {
-        printf("ERROR with closing test.txt");
+        printf("\033[1;31mERROR with closing test.txt\033[1;0m");
         return 0;
     } //TODO: checker
     return 1;
@@ -118,10 +118,10 @@ void test_is_char_x(void) {
     int len_test = 6;
     int i = 0;
     for (i = 0; i < len_test - 4; i++) {
-        if (!is_char_x(test_mass[i])) printf("ERROR in is_char_x with char %c\n", test_mass[i]);
+        if (!is_char_x(test_mass[i])) printf("\033[1;31mERROR in is_char_x with char %c\n\033[1;0m", test_mass[i]);
     }
     for (i = 2; i < len_test; i++) {
-        if (is_char_x(test_mass[i])) printf("ERROR in is_char_x with char %c\n", test_mass[i]);
+        if (is_char_x(test_mass[i])) printf("\033[1;31mERROR in is_char_x with char %c\n\033[1;0m", test_mass[i]);
     }
 }
 void test_power_of_x(void) {
@@ -134,7 +134,7 @@ void test_power_of_x(void) {
     for (int i = 0; i < amount_of_tests; i++) {
 
         if (power_of_x(&test_mass[i][0]) != answers_test[i]) {
-            printf("ERROR in power_of_x with %s\n", test_mass[i]);
+            printf("\033[1;31mERROR in power_of_x with %s\n\033[1;0m", test_mass[i]);
         }
     }
 }
@@ -150,7 +150,7 @@ int test_str_to_coef(void) { //Пока не работает, выдает ош
     int add_index = 0;
     int buf_index = 0;
     if (!(test_file = fopen("test_str.txt", "r"))) {
-        printf("ERROR in opening filetest_str.txt\n");
+        printf("\033[1;31mERROR in opening filetest_str.txt\n\033[1;0m");
         return -1;
     }
 
@@ -159,7 +159,7 @@ int test_str_to_coef(void) { //Пока не работает, выдает ош
     fclose(test_file);
 
     test_file = fopen("test_str.txt", "r");
-    adr_test = (char*) malloc(file_size + 1);
+    adr_test = (char*) calloc(file_size + 1, sizeof(char));//TODO fix
     fread(adr_test, sizeof(char),file_size, test_file);
 
     add_index = 0;
@@ -170,14 +170,17 @@ int test_str_to_coef(void) { //Пока не работает, выдает ош
         do_buffer_void(string);
 
         sscanf(adr_test + add_index, "%s %lf %lf %lf%n", string, &coef_true.a, &coef_true.b, &coef_true.c, &buf_index);
-        printf("%s %lf %lf %lf %d\n", string, coef_true.a, coef_true.b, coef_true.b, buf_index);
+        if (!strlen(string)) {
+            break;
+        }
+        // printf("\033[1;31m%s %lf %lf %lf %d\n\033[1;0m", string, coef_true.a, coef_true.b, coef_true.b, buf_index);
         string_to_coefficient(string, &output_coef);
 
         if (!is_near_zero(coef_true.a - output_coef.a)
             || !is_near_zero(coef_true.b - output_coef.b)
             || !is_near_zero(coef_true.c - output_coef.c)) {
 
-            printf("ERROR in test_str_to_coef with %s || must be %lf %lf %lf || output %lf %lf %lf\n",
+            printf("\033[1;31mERROR in test_str_to_coef with %s || must be %lf %lf %lf || output %lf %lf %lf\n\033[1;0m",
             string, coef_true.a, coef_true.b, coef_true.c, output_coef.a, output_coef.b, output_coef.c);
         }
         add_index += buf_index;
@@ -193,7 +196,7 @@ int test_str_to_coef(void) { //Пока не работает, выдает ош
 
     FILE *test_file = NULL;
     if (!(test_file = fopen("test_str.txt", "r"))) {
-        printf("ERROR with opening file in test_str_to_coef\n");
+        printf("\033[1;31mERROR with opening file in test_str_to_coef\n\033[1;0m");
         return -1;
     }
 
@@ -211,7 +214,7 @@ int test_str_to_coef(void) { //Пока не работает, выдает ош
             || !is_near_zero(coef_true.b - output_coef.b)
             || !is_near_zero(coef_true.c - output_coef.c)) {
 
-            printf("ERROR in test_str_to_coef with %s || must be %lf %lf %lf || output %lf %lf %lf\n",
+            printf("\033[1;31mERROR in test_str_to_coef with %s || must be %lf %lf %lf || output %lf %lf %lf\n\033[1;0m",
             string, coef_true.a, coef_true.b, coef_true.c, output_coef.a, output_coef.b, output_coef.c);
         }
     }
@@ -228,7 +231,7 @@ void test_plus_or_minus(void) {
     for (int i = 0; i < amount_of_tests; i++) {
 
         if (plus_or_minus(test_mass_1[i], test_mass_2[i]) != answers_test[i]) {
-            printf("ERROR in plus_or_minus with %c\n", test_mass_1[i]);
+            printf("\033[1;31mERROR in plus_or_minus with %c\n\033[1;0m", test_mass_1[i]);
         }
     }
 }
@@ -242,7 +245,7 @@ void test_str_to_int(void) {
     for (int i = 0; i < amount_of_tests; i++) {
 
         if (str_to_int(test_mass[i], (int) strlen(test_mass[i]))  != answers_test[i]) {
-            printf("ERROR in str_to_int with %s\n", test_mass[i]);
+            printf("\033[1;31mERROR in str_to_int with %s\n\033[1;0m", test_mass[i]);
         }
     }
 }

@@ -13,15 +13,15 @@ void coefficient_input_for_master_mod(double* coefficient, char alpha) {
     assert(coefficient);
 
     char buffer[MAX_LEN] = "\0";
-    char* end; //TODO надо инициализировать, но не знаю чем(
+    char* end = NULL; //TODO надо инициализировать, но не знаю чем(
 
-    printf("Input coefficient %c: ", alpha);
+    printf("\033[1;34mInput coefficient %c: \033[1;0m", alpha);
     scanf("%s", buffer);
 
     while (!isdigit(*buffer)) {
 
-        printf("\n%s is not a digit\n", buffer);
-        printf("Input coefficient %c: ", alpha);
+        printf("\033[1;34m\n%s is not a digit\n\033[1;0m", buffer);
+        printf("\033[1;34mInput coefficient %c: \033[1;0m", alpha);
         scanf("%s", buffer);
 
         while (getchar() != '\n') continue;
@@ -29,6 +29,7 @@ void coefficient_input_for_master_mod(double* coefficient, char alpha) {
     *coefficient = strtod(buffer, &end);
 }
 void do_buffer_void(char* string) {
+
     assert(string);
     for (int i = 0; i < MAX_LEN; i++) {
         *(string + i) = '\0';\
@@ -42,7 +43,7 @@ int input_data_for_base_mod(char* string_data, bool* is_user_error) {
     for (int counter_error = 0; counter_error < MAX_USERS_ERRORS; counter_error++) {
         if (counter_error == 19) {
 
-            puts("You have exhausted my patience. I'm shutting down");
+            puts("\033[1;36mYou have exhausted my patience. I'm shutting down\033[1;36m");
             *is_user_error = false;
             return 0;
         }
@@ -66,7 +67,7 @@ int input_data_for_base_mod(char* string_data, bool* is_user_error) {
                     while (getchar() != '\n') {
                         continue;
                     }
-                    printf("Please, do not type another symbol without digit, \"x\", \"^\", \"+\", \"-\", \".\", \",\"\n");
+                    printf("\033[1;34mPlease, do not type another symbol without digit, \"x\", \"^\", \"+\", \"-\", \".\", \",\"\n\033[1;0m");
 
                     is_char_correct = false;
                     break;
@@ -78,7 +79,7 @@ int input_data_for_base_mod(char* string_data, bool* is_user_error) {
                 return 1;
             }
             else {
-                printf("Please, retype your equation\n");
+                printf("\033[1;34mPlease, retype your equation\n\033[1;34m");
                 continue;
             }
         }
@@ -102,7 +103,7 @@ int is_must_continue() {
         return 1;
     }
     else {
-        puts("Good Bye\n");
+        puts("\033[1;36mGood Bye\n\033[1;0m");
         return 0;
     }
 }
