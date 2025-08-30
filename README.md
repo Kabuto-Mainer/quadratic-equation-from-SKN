@@ -55,6 +55,7 @@ This is some exaple of every input
 **first input** 
 
 ![](second_input.png)
+
 **second_input**
 
 In first input if you type uncorrect input program will throw an error and open re-input
@@ -67,9 +68,11 @@ Data for these tests is in text.txt and test_str.txt
 In test.txt there is data for testing solve_quadratic
 
 ![](test.png)
+
 First three numbers are the coefficients, next two numbers are the correct roots
 
 ![](test_str.png) 
+
 First object is string, next three numbers are correct coefficients
 
 **That's the End**
